@@ -1,0 +1,75 @@
+{
+  "settings": {
+    "defaultRounds": 3,
+    "minRounds": 1,
+    "maxRounds": 6,
+    "agreementThreshold": 0.86,
+    "agreementStreakToStop": 2,
+    "timeoutMs": 300000,
+    "knowledgeDir": "knowledge"
+  },
+  "defaultParticipantIds": ["gemini", "codex"],
+  "defaultJudgeId": "claude",
+  "engines": [
+    {
+      "id": "gemini",
+      "type": "cli",
+      "engineLabel": "Gemini · Antigravity CLI",
+      "command": "agy",
+      "baseArgs": ["-p", "{PROMPT}", "--output-format", "json", "--dangerously-skip-permissions", "--sandbox", "{MODELFLAGS}"],
+      "modelFlag": "--model",
+      "output": { "type": "json", "textPath": "response", "statusPath": "status", "okStatus": "SUCCESS" },
+      "suggestedModels": ["Gemini 3.8 Flash (High)", "Gemini 3.8 Flash (Medium)", "Gemini 3.8 Flash (Low)"]
+    },
+    {
+      "id": "codex",
+      "type": "cli",
+      "engineLabel": "GPT · Codex CLI",
+      "command": "codex",
+      "baseArgs": ["exec", "--skip-git-repo-check", "--approve-for-me", "-c", "tools.web_search=true", "{MODELFLAGS}", "-o", "{OUTFILE}", "-"],
+      "modelFlag": "-m",
+      "output": { "type": "last-message-file" },
+      "suggestedModels": ["gpt-5.6-terra"]
+    },
+    {
+      "id": "claude",
+      "type": "cli",
+      "engineLabel": "Claude · Claude Code CLI",
+      "command": "claude",
+      "baseArgs": [
+        "-p",
+        "--output-format", "json",
+        "--allowedTools", "WebSearch,WebFetch",
+        "--disallowedTools", "mcp__wrapstation-db",
+        "{MODELFLAGS}"
+      ],
+      "modelFlag": "--model",
+      "output": { "type": "json", "textPath": "result", "errorFlagPath": "is_error" },
+      "suggestedModels": ["sonnet", "opus", "haiku", "fable"],
+      "_comment": "--disallowedTools mcp__wrapstation-db WAJIB ada di sini walau --allowedTools di atas sudah tidak menyebutnya: wrapstation-db terdaftar di scope USER/global pada CLI claude yang sama (dipakai juga oleh project ai-answer-test), jadi tanpa larangan eksplisit ini ada risiko ke-load otomatis lintas project. Lihat PRD bagian 1.1."
+    }
+  ],
+  "models": [
+    {
+      "id": "gemini",
+      "engineId": "gemini",
+      "label": "Gemini",
+      "modelVariant": "Gemini 3.8 Flash (Low)",
+      "builtin": true
+    },
+    {
+      "id": "codex",
+      "engineId": "codex",
+      "label": "GPT",
+      "modelVariant": "",
+      "builtin": true
+    },
+    {
+      "id": "claude",
+      "engineId": "claude",
+      "label": "Claude",
+      "modelVariant": "",
+      "builtin": true
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "wrapstation-knowledge-orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Multi-AI knowledge orchestrator: 3 AI (CLI) berdebat soal kondisi pasar otomotif eksternal untuk periode target, 1 AI menyimpulkan jadi knowledge bundle buat dikonsumsi sistem Qwen. Tidak pernah menyentuh data ERP Wrapstation.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

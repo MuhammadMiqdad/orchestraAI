@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wrapstation Knowledge Orchestrator</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Wrapstation Knowledge Orchestrator</h1>
+      <p class="subtitle">
+        Testing UI — pilih tanggal target prediksi, lalu Generate. 3 AI (Gemini + GPT berdebat, Claude menyimpulkan)
+        akan mendiskusikan kondisi pasar otomotif publik untuk periode itu. Tidak ada data internal perusahaan yang dipakai.
+      </p>
+    </header>
+
+    <section class="controls">
+      <label for="referenceDate">Tanggal target prediksi</label>
+      <input type="date" id="referenceDate" />
+      <button id="generateBtn">Generate</button>
+    </section>
+
+    <section class="status" id="statusSection" hidden>
+      <h2>Progress</h2>
+      <div id="log" class="log"></div>
+    </section>
+
+    <section class="result" id="resultSection" hidden>
+      <h2>Hasil Diskusi</h2>
+      <p id="resultMeta" class="meta"></p>
+      <div id="resultReadable" class="readable"></div>
+      <details class="rawDetails">
+        <summary>Lihat JSON mentah (buat debugging / dicek Qwen nanti)</summary>
+        <pre id="resultJson"></pre>
+      </details>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

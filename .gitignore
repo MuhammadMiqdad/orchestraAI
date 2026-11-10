@@ -1,0 +1,5 @@
+node_modules/
+.env
+knowledge/*.json
+!knowledge/.gitkeep
+transcripts/
